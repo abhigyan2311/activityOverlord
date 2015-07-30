@@ -39,6 +39,8 @@ module.exports = {
   },
 
   index: function(req, res, next) {
+
+
     User.find(function foundUsers (err, users) {
       if (err) return next(err);
 
