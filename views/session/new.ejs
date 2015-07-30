@@ -2,9 +2,9 @@
   <h2 class="form-signin-heading">Please sign in...</h2>
 
   <% if(flash && flash.err) { %>
-  <ul class="alert alert-success">
+  <ul class="alert alert-danger">
     <% Object.keys(flash.err).forEach(function(error) { %>
-    <li><%- JSON.stringify(flash.err[error]) %></li>
+    <li style="margin-left: 10px;"><%- JSON.stringify(flash.err[error]) %></li>
     <% }) %>
   </ul>
   <% } %>

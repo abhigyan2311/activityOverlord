@@ -18,7 +18,7 @@ module.exports = {
 
     if(!req.param('email') || !req.param('password')){
 
-      var usernamePasswordRequiredError = [{name: 'usernamePasswordRequiredError', message: 'You must enter both username and password'}]
+      var usernamePasswordRequiredError = ["You must enter both username and password"];
 
       req.session.flash = {
         err: usernamePasswordRequiredError
@@ -34,7 +34,7 @@ module.exports = {
       if(err) return next(err);
 
       if(!user) {
-        var noAccountError = [{name: 'no Account', message:'The email address' + req.param('email') + ' not found.'}];
+        var noAccountError = ["The email address" + req.param('email') + " not found."];
         req.session.flash = {
           err: noAccountError
         };
@@ -46,7 +46,7 @@ module.exports = {
         if(err) return next(err);
 
         if(!valid) {
-          var usernamePasswordMismatchError = [{name: usernamePasswordMismatch, message: 'Invalid username/password'}];
+          var usernamePasswordMismatchError = ["Invalid username/password"];
           req.session.flash = {
             err: usernamePasswordMismatchError
           };
@@ -56,11 +56,17 @@ module.exports = {
 
         req.session.authenticated = true;
         req.session.User = user;
-
         res.redirect('/user/show/' + user.id);
+
+
       });
     });
 
+  },
+
+  destroy: function(req, res, next){
+    req.session.destroy();
+    res.redirect('/session/new');
   }
 
 };
